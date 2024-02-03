@@ -1,10 +1,10 @@
 class DataAccess:
     database_address=''
 
-    def set_sources_received(email, string):
+    def set_sources_received(email):
         return "Not implimented"
     
-    def get_sources_received(email, string):
+    def get_sources_received(email):
         return "Not implimented"
 
     def get_available_resources(email):
@@ -13,5 +13,5 @@ class DataAccess:
     def set_purchased_resources (email):
         return "Not implimented"
 
-    def get_purchased_resources (email, string):
+    def get_purchased_resources (email):
         return "Not implimented"
