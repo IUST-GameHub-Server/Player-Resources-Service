@@ -1,22 +1,16 @@
-from ..LogicLayer.UserResourcesLogic import UserResourcesLogic
-from flask import Flask
+from ..LogicLayer.UserResourcesLogic import ResourcesLogicHandler
+from flask import Flask, request
 
 app = Flask(__name__)
-config=""
 
-@app.route('/show_acquired_resources')
-def show_acquired_resources(email):
-    return "Not Implemented"
+@app.route('/create_user_resources',methods=['PUT'])
+def create_user_resources():
+    return ResourcesLogicHandler.create_user(request.data)
 
-@app.route('/show_additional_allowed_activities')
-def show_additional_allowed_activities (email):
-    return "Not Implemented"
+@app.route('/update_user_resources',methods=['POST'])
+def update_user_resources():
+    return ResourcesLogicHandler.update_user_resource(request.data)
 
-
-@app.route('/show_possible_obtainable_resources')
-def show_possible_obtainable_resources (email):
-    return "Not Implemented"
-
-@app.route('/show_purchased_resources')
-def show_purchased_resources (email):
-    return "Not Implemented"
+@app.route('/get_user_resources',methods=['GET'])
+def get_user_resources():
+    return ResourcesLogicHandler.collect_user_resources(request.data)

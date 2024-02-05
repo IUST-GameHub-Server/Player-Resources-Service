@@ -1,17 +1,67 @@
+import sqlite3
+
 class DataAccess:
-    database_address=''
+    def create_user(email):
+        conn=sqlite3.connect('./PlayerResourcesService/DataLayer/resources.db')
+        cur=conn.cursor()
+        cur.execute(f"""
+        CREATE TABLE IF NOT EXISTS resources(
+                    email TEXT PRIMARY KEY,
+                    coins INT,
+                    gems INT,
+                    tickets INT
+        );
+        """)
 
-    def set_sources_received(email):
-        return "Not implimented"
+        cur.execute(f"""
+        INSERT INTO resources(email, coins, gems, tickets) VALUES('{email}', {0},{0},{0});
+        """)
+        conn.commit()
+        return "user created successfully"
     
-    def get_sources_received(email):
-        return "Not implimented"
+    def set_gems(email,gems):
+        conn=sqlite3.connect('./PlayerResourcesService/DataLayer/resources.db')
+        cur=conn.cursor()
+        cur.execute(f"""
+        UPDATE resources SET gems = '{gems}' WHERE email='{email}'
+        """)
 
-    def get_available_resources(email):
-        return "Not implimented"
+    def set_coins(email,coins):
+        conn=sqlite3.connect('./PlayerResourcesService/DataLayer/resources.db')
+        cur=conn.cursor()
+        cur.execute(f"""
+        UPDATE resources SET coins = '{coins}' WHERE email='{email}'
+        """)
 
-    def set_purchased_resources (email):
-        return "Not implimented"
+    def set_tickets(email,tickets):
+        conn=sqlite3.connect('./PlayerResourcesService/DataLayer/resources.db')
+        cur=conn.cursor()
+        cur.execute(f"""
+        UPDATE resources SET tickets = '{tickets}' WHERE email='{email}'
+        """)
 
-    def get_purchased_resources (email):
-        return "Not implimented"
+    def get_gems(email):
+        conn=sqlite3.connect('./PlayerResourcesService/DataLayer/resources.db')
+        cur=conn.cursor()
+        cur.execute(f"""
+        SELECT gems FROM progress where email='{email}'
+        """)
+        return cur.fetchone()
+    
+    def get_coins(email):
+        conn=sqlite3.connect('./PlayerResourcesService/DataLayer/resources.db')
+        cur=conn.cursor()
+        cur.execute(f"""
+        SELECT coins FROM progress where email='{email}'
+        """)
+        return cur.fetchone()
+    
+    def get_tickets(email):
+        conn=sqlite3.connect('./PlayerResourcesService/DataLayer/resources.db')
+        cur=conn.cursor()
+        cur.execute(f"""
+        SELECT tickets FROM progress where email='{email}'
+        """)
+        return cur.fetchone()
+    
+    
